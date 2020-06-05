@@ -1,0 +1,550 @@
+{
+  "intents": [
+    {
+      "intent": "slotbooking",
+      "examples": [
+        {
+          "text": "I want to book the slot"
+        },
+        {
+          "text": "book slot"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Rationitems",
+      "examples": [
+        {
+          "text": "Ration items available today"
+        },
+        {
+          "text": "Goods available today"
+        },
+        {
+          "text": "What are the items available"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Operation_hours",
+      "examples": [
+        {
+          "text": "how long the ration shop is open?"
+        },
+        {
+          "text": "Till what time do you accept slot booking?"
+        },
+        {
+          "text": "upto what time the rarion shop will be open?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Greetings",
+      "examples": [
+        {
+          "text": "Hello"
+        },
+        {
+          "text": "Hii"
+        },
+        {
+          "text": "How are you?"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sys-time",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "yes_no",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Ok",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Y",
+          "synonyms": [
+            "Yes",
+            "yeah",
+            "oh.Yeah",
+            "sure",
+            "of course"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "N",
+          "synonyms": [
+            "No",
+            "Nope",
+            "Not now",
+            "Never"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "city",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Maharastra",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Kerala",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Andhra Pradesh",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Tamil Nadu",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Delhi",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "calcutta",
+          "synonyms": [
+            "city of joy"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Mumbai",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "hyderabad",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-date",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "person_name",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "chandana",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Sita",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Geetha",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "latha",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "bharat",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "what is the name of the person?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_6_1591168716485",
+      "event_name": "focus",
+      "dialog_node": "handler_4_1591168716488",
+      "previous_sibling": "handler_9_1591168716488"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_6_1591168716485",
+      "context": {
+        "i_person": "@person_name"
+      },
+      "conditions": "@person_name",
+      "event_name": "input",
+      "dialog_node": "handler_9_1591168716488"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "which city"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_9_1591112845478",
+      "event_name": "focus",
+      "dialog_node": "handler_10_1591112845483",
+      "previous_sibling": "handler_2_1591112845483"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_9_1591112845478",
+      "context": {
+        "i_city": "@city"
+      },
+      "conditions": "@city",
+      "event_name": "input",
+      "dialog_node": "handler_2_1591112845483"
+    },
+    {
+      "type": "slot",
+      "parent": "node_9_1591112201846",
+      "variable": "$i_date",
+      "dialog_node": "slot_1_1591112521263",
+      "previous_sibling": "handler_1_1591112520866"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Please enter person name, date,time and city to make the slot.\n"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1591112201846",
+      "event_name": "focus",
+      "dialog_node": "handler_1_1591112520866",
+      "previous_sibling": "node_8_1591170670673"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_9_1591112201846",
+      "variable": "$i_person",
+      "dialog_node": "slot_6_1591168716485",
+      "previous_sibling": "slot_9_1591112845478"
+    },
+    {
+      "type": "slot",
+      "parent": "node_9_1591112201846",
+      "variable": "$i_time",
+      "dialog_node": "slot_1_1591112833369",
+      "previous_sibling": "slot_1_1591112521263"
+    },
+    {
+      "type": "slot",
+      "parent": "node_9_1591112201846",
+      "variable": "$i_city",
+      "dialog_node": "slot_9_1591112845478",
+      "previous_sibling": "slot_1_1591112833369"
+    },
+    {
+      "type": "standard",
+      "title": "confirm",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "one moment plese I'm processing your data and will give nyou the confirmation reservation number soon."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1591112201846",
+      "conditions": "@yes_no",
+      "dialog_node": "node_8_1591170670673"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "What day would you like to book slot?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_1_1591112521263",
+      "event_name": "focus",
+      "dialog_node": "handler_6_1591112521278",
+      "previous_sibling": "handler_2_1591112521278"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1591112521263",
+      "context": {
+        "i_date": "@sys-date"
+      },
+      "conditions": "@sys-date",
+      "event_name": "input",
+      "dialog_node": "handler_2_1591112521278"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "which time"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_1_1591112833369",
+      "event_name": "focus",
+      "dialog_node": "handler_9_1591112833371",
+      "previous_sibling": "handler_10_1591112833371"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1591112833369",
+      "context": {
+        "i_time": "@sys-time"
+      },
+      "conditions": "@sys-time",
+      "event_name": "input",
+      "dialog_node": "handler_10_1591112833371"
+    },
+    {
+      "type": "slot",
+      "parent": "node_1_1591113766957",
+      "variable": "$i_city",
+      "dialog_node": "slot_8_1591171513963",
+      "previous_sibling": "handler_1_1591171513397"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Please enter your city name "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1591113766957",
+      "event_name": "focus",
+      "dialog_node": "handler_1_1591171513397"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "enter your location"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_8_1591171513963",
+      "event_name": "focus",
+      "dialog_node": "handler_6_1591171513980",
+      "previous_sibling": "handler_5_1591171513980"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_8_1591171513963",
+      "context": {
+        "i_city": "@city"
+      },
+      "conditions": "@city",
+      "event_name": "input",
+      "dialog_node": "handler_5_1591171513980"
+    },
+    {
+      "type": "frame",
+      "title": "ration items intent",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Goods availabe are Rice,sugar and oil"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Rationitems || @city",
+      "dialog_node": "node_1_1591113766957",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "sorry! I cant get you."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_9_1591112201846",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Welcome ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello.My name is sample bot.welcome to safe queue.How can i help you."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome || #Greetings",
+      "dialog_node": "Welcome",
+      "previous_sibling": "node_10_1591172059630"
+    },
+    {
+      "type": "frame",
+      "title": "Make slot booking",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Thanks.$i_person. I'm going to book a slot on $i_date at $i_time in city $i_city\nDo you confirm the booking?\n"
+              },
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_8_1591170670673"
+      },
+      "conditions": "#slotbooking",
+      "dialog_node": "node_9_1591112201846",
+      "previous_sibling": "node_1_1591113766957"
+    },
+    {
+      "type": "standard",
+      "title": "Operation hours intent",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Ration shop working days are monday to saturday (9am to 5pm)"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Operation_hours",
+      "dialog_node": "node_10_1591172059630"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "My first skill",
+  "language": "en",
+  "description": ""
+}
